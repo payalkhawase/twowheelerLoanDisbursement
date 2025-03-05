@@ -22,13 +22,6 @@ public class LoanDisbursement {
 	
 	@Column(unique = true, nullable = false)
 	private int loanNo=101;
-	public void generateLoanNumbers(int numLoan) {
-		
-	for (int i = 0; i < (numLoan=10); i++) {
-        System.out.println(loanNo);   
-        loanNo++;  
-    }
-	}
 	private Date agreementDate;
 	private String amountPayType;
 	private double totalAmount;
