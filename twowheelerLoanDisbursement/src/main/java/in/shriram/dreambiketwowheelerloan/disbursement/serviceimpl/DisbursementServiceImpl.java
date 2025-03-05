@@ -23,7 +23,7 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 	@Override
 	public LoanDisbursement addAlldata(double transferAmount,int customerId) {
 		
-		Customer co=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId,Customer.class);
+		Customer co=rt.getForObject("http://localhost:7777/sanction/getSanctionList/",Customer.class);
 		
 		LoanDisbursement lDetails = new LoanDisbursement();
 		

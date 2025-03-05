@@ -25,9 +25,9 @@ public class Customer {
 	private String loanStatus="Submit";
 	private double onRoadPrice;
 	private int requiredTenure;
-	private String interesType;
+	private String interesType="Compound Interest";
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails acdetails;
 	
 	@OneToOne(cascade = CascadeType.ALL)
