@@ -33,7 +33,7 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		lDetails.setBankName(co.getAcdetails().getBankName());
 		lDetails.setAccountNumber(co.getAcdetails().getAccountNumber());
 		lDetails.setIFSCCode(co.getAcdetails().getIFSCCode());
-		lDetails.setAccountType(co.getAcdetails().getAccountType());
+		lDetails.setAccountType(co.getAcdetails().getAccounType() );
 		lDetails.setTransferAmount(transferAmount);
 		lDetails.setPaymentStatus("not paid");
 		lDetails.setAmountPaidDate(new Date());
