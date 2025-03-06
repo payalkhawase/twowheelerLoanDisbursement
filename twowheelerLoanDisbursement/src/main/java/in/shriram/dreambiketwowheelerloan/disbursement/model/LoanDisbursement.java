@@ -21,7 +21,11 @@ public class LoanDisbursement {
 	private int agreementId;
 	
 	@Column(unique = true, nullable = false)
-	private int loanNo=101;
+	private int loanNo;
+	  private static int loanNoCounter = 101;
+	  public LoanDisbursement() {
+	  this.loanNo=loanNoCounter++;
+	  }
 	private Date agreementDate;
 	private String amountPayType;
 	private double totalAmount;
