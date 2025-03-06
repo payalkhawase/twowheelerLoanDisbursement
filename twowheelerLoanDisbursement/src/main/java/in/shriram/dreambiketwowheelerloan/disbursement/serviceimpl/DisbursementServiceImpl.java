@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.Customer;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.LoanDisbursement;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.SanctionLetter;
+import in.shriram.dreambiketwowheelerloan.disbursement.repository.CustomerRepo;
 import in.shriram.dreambiketwowheelerloan.disbursement.repository.DisbursementRepository;
 import in.shriram.dreambiketwowheelerloan.disbursement.servicei.DisbursementServiceI;
 
@@ -20,13 +21,15 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 	
 	@Autowired
 	RestTemplate rt;
-
+    
+	@Autowired
+	CustomerRepo cr;
 	@Override
 	public LoanDisbursement addAlldata(double transferAmount,int customerId) {
 		
 		
-		Customer co=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
-		SanctionLetter sl=rt.getForObject("http://localhost:7777/sanction/getSanctionList/"+co.getSanctionletter().getSanctionId(),SanctionLetter.class);
+		Customer co=rt.getForObject("http://localhost:7777/apploan/getSanctionList/"+customerId, Customer.class);
+		
 		LoanDisbursement lDetails = new LoanDisbursement();
 		
 		lDetails.setAgreementDate(new Date());
@@ -39,7 +42,9 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		lDetails.setTransferAmount(transferAmount);
 		lDetails.setPaymentStatus("not paid");
 		lDetails.setAmountPaidDate(new Date());
-		
-		return dr.save(lDetails);
+		LoanDisbursement ld=dr.save(lDetails);
+		co.setLoandisburst(ld);
+		cr.save(co);
+		return ld;
 	}
 }
