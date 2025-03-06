@@ -1,9 +1,12 @@
 package in.shriram.dreambiketwowheelerloan.disbursement.model;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 @Entity
@@ -26,7 +29,7 @@ public class Customer {
 	private String loanStatus="Submit";
 	private double onRoadPrice;
 	private int requiredTenure;
-	private String interesType;
+	private String interesType="Compound Interest";
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private SanctionLetter sanctionletter;
@@ -57,8 +60,8 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoanDisbursement loandisburst;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Ledger led;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Ledger> led;
 	
 	
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.Customer;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.LoanDisbursement;
+import in.shriram.dreambiketwowheelerloan.disbursement.model.SanctionLetter;
 import in.shriram.dreambiketwowheelerloan.disbursement.repository.DisbursementRepository;
 import in.shriram.dreambiketwowheelerloan.disbursement.servicei.DisbursementServiceI;
 
@@ -23,8 +24,9 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 	@Override
 	public LoanDisbursement addAlldata(double transferAmount,int customerId) {
 		
-		Customer co=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId,Customer.class);
 		
+		Customer co=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
+		SanctionLetter sl=rt.getForObject("http://localhost:7777/sanction/getSanctionList/"+co.getSanctionletter().getSanctionId(),SanctionLetter.class);
 		LoanDisbursement lDetails = new LoanDisbursement();
 		
 		lDetails.setAgreementDate(new Date());
@@ -32,8 +34,8 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		lDetails.setTotalAmount(co.getSanctionletter().getLoanAmtSanctioned());
 		lDetails.setBankName(co.getAcdetails().getBankName());
 		lDetails.setAccountNumber(co.getAcdetails().getAccountNumber());
-		lDetails.setIFSCCode(co.getAcdetails().getIFSCCode());
-		lDetails.setAccountType(co.getAcdetails().getAccounType() );
+		lDetails.setIFSCCode(co.getAcdetails().getIfscCode());
+		lDetails.setAccountType(co.getAcdetails().getAccountType() );
 		lDetails.setTransferAmount(transferAmount);
 		lDetails.setPaymentStatus("not paid");
 		lDetails.setAmountPaidDate(new Date());

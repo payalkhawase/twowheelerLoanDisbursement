@@ -21,14 +21,11 @@ public class LoanDisbursement {
 	private int agreementId;
 	
 	@Column(unique = true, nullable = false)
-	private int loanNo=101;
-	public void generateLoanNumbers(int numLoan) {
-		
-	for (int i = 0; i < (numLoan=10); i++) {
-        System.out.println(loanNo);   
-        loanNo++;  
-    }
-	}
+	private int loanNo;
+	  private static int loanNoCounter = 101;
+	  public LoanDisbursement() {
+	  this.loanNo=loanNoCounter++;
+	  }
 	private Date agreementDate;
 	private String amountPayType;
 	private double totalAmount;
