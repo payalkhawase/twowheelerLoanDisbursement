@@ -37,7 +37,7 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
        // lDetails.setLoanNo(loanNo != null ? loanNo + 1 : 1);
 		LoanDisbursement loanNo=dr.findAgreementIdByOrderByAgreementIdDesc(Limit.of(1));
 		int ln;
-		if(loanNo.equals(null)) {
+		if(loanNo==null) {
 			ln=1;
 		}else {
 			 ln=loanNo.getLoanNo()+1;
