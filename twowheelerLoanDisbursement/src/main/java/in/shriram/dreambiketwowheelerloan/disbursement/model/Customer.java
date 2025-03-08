@@ -23,7 +23,7 @@ public class Customer {
 
 	private String customerMobileNumber;
 	private double customerAdditionalMobileNumber;
-	private double customerAmountPaidForHome;
+	private double customerAmountPaidForBike;
 	private double customerTotalLoanRequired;
 	private String customerEmail;
 	private String password;

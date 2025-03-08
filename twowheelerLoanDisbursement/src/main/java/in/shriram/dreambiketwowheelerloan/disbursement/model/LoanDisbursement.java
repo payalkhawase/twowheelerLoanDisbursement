@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
@@ -21,11 +22,14 @@ public class LoanDisbursement {
 	private int agreementId;
 	
 	@Column(unique = true, nullable = false)
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "second_id_seq")
+   // @SequenceGenerator(name = "second_id_seq", sequenceName = "second_id_seq", allocationSize = 1)
 	private int loanNo;
-	  private static int loanNoCounter = 101;
+	
+	 /* private static int loanNoCounter = 101;
 	  public LoanDisbursement() {
 	  this.loanNo=loanNoCounter++;
-	  }
+	  }*/
 	private Date agreementDate;
 	private String amountPayType;
 	private double totalAmount;
