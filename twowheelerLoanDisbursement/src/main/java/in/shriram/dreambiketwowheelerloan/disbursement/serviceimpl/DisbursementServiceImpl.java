@@ -2,7 +2,9 @@ package in.shriram.dreambiketwowheelerloan.disbursement.serviceimpl;
 
 import java.util.Date;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Limit;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import in.shriram.dreambiketwowheelerloan.disbursement.model.Customer;
@@ -31,6 +33,16 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		Customer co=rt.getForObject("http://localhost:7777/apploan/getSanctionList/"+customerId, Customer.class);
 		
 		LoanDisbursement lDetails = new LoanDisbursement();
+		//Integer loanNo = dr.getLastSecondId();
+       // lDetails.setLoanNo(loanNo != null ? loanNo + 1 : 1);
+		LoanDisbursement loanNo=dr.findAgreementIdByOrderByAgreementIdDesc(Limit.of(1));
+		int ln;
+		if(loanNo.equals(null)) {
+			ln=1;
+		}else {
+			 ln=loanNo.getLoanNo()+1;
+		}
+		lDetails.setLoanNo(ln);
 		
 		lDetails.setAgreementDate(new Date());
 		lDetails.setAmountPayType(co.getSanctionletter().getModeOfPayment());
@@ -44,6 +56,7 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		lDetails.setAmountPaidDate(new Date());
 		LoanDisbursement ld=dr.save(lDetails);
 		co.setLoandisburst(ld);
+		co.setLoanStatus("Disbursed");
 		cr.save(co);
 		return ld;
 	}
