@@ -61,6 +61,8 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoanDisbursement loandisburst;
 	
+
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Ledger> led;
 	
