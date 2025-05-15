@@ -1,9 +1,6 @@
 package in.shriram.dreambiketwowheelerloan.disbursement.model;
 
 import java.util.List;
-
-import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,6 +10,9 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 @Entity
 @Data
+//@JsonIgnoreProperties(ignoreUnknown = true)
+
+
 public class Customer {
 
 	@Id
@@ -21,8 +21,7 @@ public class Customer {
 	private String customerDateOfBirth;
 	private int customerAge;
 	private String customerGender;
-
-	private String customerMobileNumber;
+    private String customerMobileNumber;
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForBike;
 	private double customerTotalLoanRequired;
@@ -32,6 +31,7 @@ public class Customer {
 	private double onRoadPrice;
 	private int requiredTenure;
 	private String interesType="Compound Interest";
+	 private String  userType="CUSTOMER";
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private SanctionLetter sanctionletter;
@@ -63,7 +63,7 @@ public class Customer {
 	private LoanDisbursement loandisburst;
 	
    @OneToMany(cascade = CascadeType.ALL)
-	private List<Ledger> led;
+	private List <Ledger> led;
 	
 	
 
