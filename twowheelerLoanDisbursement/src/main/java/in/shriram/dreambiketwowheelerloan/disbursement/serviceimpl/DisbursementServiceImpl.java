@@ -60,4 +60,9 @@ public class DisbursementServiceImpl implements DisbursementServiceI{
 		cr.save(co);
 		return ld;
 	}
+	@Override
+	public LoanDisbursement getListDisbursment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
